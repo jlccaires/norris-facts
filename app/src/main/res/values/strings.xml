@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Norris Facts</string>
+    <string name="error_message">Chuck Norris did not allow you see this!</string>
+    <string name="try_again">Try</string>
+</resources>

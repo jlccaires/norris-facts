@@ -1,0 +1,21 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:actionBarStyle">@style/ToolBarTheme</item>
+    </style>
+
+    <style name="ToolBarTheme" parent="@style/ThemeOverlay.MaterialComponents.ActionBar">
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="CardStyle" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="cardElevation">6dp</item>
+        <item name="strokeColor">#FFF</item>
+    </style>
+
+</resources>
