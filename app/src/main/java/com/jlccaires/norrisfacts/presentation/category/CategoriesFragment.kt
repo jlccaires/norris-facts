@@ -5,7 +5,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.android.material.snackbar.Snackbar
 import com.jlccaires.norrisfacts.R
-import com.jlccaires.norrisfacts.di.DaggerAppComponent
 import com.jlccaires.norrisfacts.presentation.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_categories.*
 import javax.inject.Inject
@@ -20,7 +19,7 @@ class CategoriesFragment : BaseFragment<CategoriesContract.View, CategoriesContr
     protected lateinit var mAdapter: CategoriesAdapter
 
     override fun init() {
-        DaggerAppComponent.create().inject(this)
+        component.inject(this)
 
         mAdapter = CategoriesAdapter()
         mAdapter.clickListener {

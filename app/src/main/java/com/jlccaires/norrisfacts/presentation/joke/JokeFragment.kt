@@ -5,7 +5,6 @@ import android.net.Uri
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import com.jlccaires.norrisfacts.R
-import com.jlccaires.norrisfacts.di.DaggerAppComponent
 import com.jlccaires.norrisfacts.presentation.NorrisAnimations
 import com.jlccaires.norrisfacts.presentation.base.BaseFragment
 import com.squareup.picasso.Picasso
@@ -21,8 +20,8 @@ class JokeFragment : BaseFragment<JokeContract.View, JokeContract.Presenter>(), 
     override lateinit var mPresenter: JokeContract.Presenter
 
     override fun init() {
-        DaggerAppComponent.create().inject(this)
-        
+        component.inject(this)
+
         mPresenter.attachView(this)
         mPresenter.setCategory(JokeFragmentArgs.fromBundle(arguments).category)
         cardView.setOnClickListener {
