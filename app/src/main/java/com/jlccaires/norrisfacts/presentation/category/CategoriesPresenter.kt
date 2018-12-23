@@ -1,23 +1,23 @@
 package com.jlccaires.norrisfacts.presentation.category
 
-import androidx.annotation.VisibleForTesting
-import com.jlccaires.norrisfacts.data.NorrisClient
+import com.jlccaires.norrisfacts.data.NorrisService
 import com.jlccaires.norrisfacts.presentation.addTo
 import com.jlccaires.norrisfacts.presentation.base.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
-import org.androidannotations.annotations.Bean
-import org.androidannotations.annotations.EBean
+import javax.inject.Inject
 
-@EBean
-class CategoriesPresenter : BasePresenter<CategoriesContract.View>(), CategoriesContract.Presenter {
+class CategoriesPresenter : BasePresenter<CategoriesContract.View>, CategoriesContract.Presenter {
 
-    @Bean
-    @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
-    lateinit var client: NorrisClient
+    private val service: NorrisService
+
+    @Inject
+    constructor(service: NorrisService) {
+        this.service = service
+    }
 
     override fun loadCategories() {
         getView().setLoading(true)
-        client.api().listCategories()
+        service.listCategories()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { list ->

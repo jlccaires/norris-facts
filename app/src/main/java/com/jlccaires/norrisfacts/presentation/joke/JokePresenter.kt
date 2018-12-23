@@ -1,18 +1,20 @@
 package com.jlccaires.norrisfacts.presentation.joke
 
-import com.jlccaires.norrisfacts.data.NorrisClient
+import com.jlccaires.norrisfacts.data.NorrisService
 import com.jlccaires.norrisfacts.presentation.addTo
 import com.jlccaires.norrisfacts.presentation.base.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
-import org.androidannotations.annotations.Bean
-import org.androidannotations.annotations.EBean
+import javax.inject.Inject
 
-@EBean
-class JokePresenter : BasePresenter<JokeContract.View>(), JokeContract.Presenter {
+class JokePresenter : BasePresenter<JokeContract.View>, JokeContract.Presenter {
 
-    @Bean
-    protected lateinit var client: NorrisClient
+    private val service: NorrisService
     private lateinit var category: String
+
+    @Inject
+    constructor(service: NorrisService) {
+        this.service = service
+    }
 
     override fun setCategory(category: String) {
         this.category = category
@@ -24,7 +26,7 @@ class JokePresenter : BasePresenter<JokeContract.View>(), JokeContract.Presenter
 
     override fun loadJoke() {
         getView().setLoading(true)
-        client.api().getJoke(category)
+        service.getJoke(category)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { joke ->

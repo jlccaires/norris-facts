@@ -5,23 +5,26 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.android.material.snackbar.Snackbar
 import com.jlccaires.norrisfacts.R
+import com.jlccaires.norrisfacts.di.DaggerAppComponent
 import com.jlccaires.norrisfacts.presentation.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_categories.*
-import org.androidannotations.annotations.Bean
-import org.androidannotations.annotations.EFragment
+import javax.inject.Inject
 
-@EFragment(R.layout.fragment_categories)
 class CategoriesFragment : BaseFragment<CategoriesContract.View, CategoriesContract.Presenter>(),
     CategoriesContract.View {
 
-    @Bean(CategoriesPresenter::class)
+    override val layout = R.layout.fragment_categories
+
+    @Inject
     override lateinit var mPresenter: CategoriesContract.Presenter
     protected lateinit var mAdapter: CategoriesAdapter
 
     override fun init() {
+        DaggerAppComponent.create().inject(this)
+
         mAdapter = CategoriesAdapter()
         mAdapter.clickListener {
-            findNavController().navigate(CategoriesFragment_Directions.actionCategoriesFragmentToJokeFragment(it))
+            findNavController().navigate(CategoriesFragmentDirections.actionCategoriesFragmentToJokeFragment(it))
         }
         rvCategories.adapter = mAdapter
         rvCategories.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))

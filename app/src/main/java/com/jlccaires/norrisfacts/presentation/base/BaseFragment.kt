@@ -1,16 +1,21 @@
 package com.jlccaires.norrisfacts.presentation.base
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import org.androidannotations.annotations.AfterViews
-import org.androidannotations.annotations.EFragment
 
-@EFragment
 abstract class BaseFragment<V : BaseContract.View, T : BaseContract.Presenter<V>> : Fragment() {
 
+    protected abstract val layout: Int
     protected abstract var mPresenter: T
 
-    @AfterViews
-    fun afterViews() = init()
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(layout, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = init()
 
     abstract fun init()
 

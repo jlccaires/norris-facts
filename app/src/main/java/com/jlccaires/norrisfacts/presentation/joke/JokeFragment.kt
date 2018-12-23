@@ -5,23 +5,26 @@ import android.net.Uri
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import com.jlccaires.norrisfacts.R
+import com.jlccaires.norrisfacts.di.DaggerAppComponent
 import com.jlccaires.norrisfacts.presentation.NorrisAnimations
 import com.jlccaires.norrisfacts.presentation.base.BaseFragment
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_joke.*
-import org.androidannotations.annotations.Bean
-import org.androidannotations.annotations.EFragment
+import javax.inject.Inject
 
 
-@EFragment(R.layout.fragment_joke)
 class JokeFragment : BaseFragment<JokeContract.View, JokeContract.Presenter>(), JokeContract.View {
 
-    @Bean(JokePresenter::class)
+    override val layout = R.layout.fragment_joke
+
+    @Inject
     override lateinit var mPresenter: JokeContract.Presenter
 
     override fun init() {
+        DaggerAppComponent.create().inject(this)
+        
         mPresenter.attachView(this)
-        mPresenter.setCategory(JokeFragment_Args.fromBundle(arguments).category)
+        mPresenter.setCategory(JokeFragmentArgs.fromBundle(arguments).category)
         cardView.setOnClickListener {
             mPresenter.jokeClicked()
         }
@@ -51,9 +54,9 @@ class JokeFragment : BaseFragment<JokeContract.View, JokeContract.Presenter>(), 
         Picasso.get().load(icon).into(ivIcon)
     }
 
-    override fun setUrl(joke: String?) {
+    override fun setUrl(url: String?) {
         ibUrl.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(joke))
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)
         }
     }

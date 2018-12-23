@@ -7,7 +7,7 @@
 
     <fragment
             android:id="@+id/categoriesFragment"
-            android:name="com.jlccaires.norrisfacts.presentation.category.CategoriesFragment_"
+            android:name="com.jlccaires.norrisfacts.presentation.category.CategoriesFragment"
             android:label="@string/app_name">
         <action
                 android:id="@+id/action_categoriesFragment_to_jokeFragment"
@@ -16,7 +16,7 @@
 
     <fragment
             android:id="@+id/jokeFragment"
-            android:name="com.jlccaires.norrisfacts.presentation.joke.JokeFragment_"
+            android:name="com.jlccaires.norrisfacts.presentation.joke.JokeFragment"
             android:label="Norris Joke"
             tools:layout="@layout/fragment_joke">
         <argument
