@@ -1,10 +1,6 @@
 # Norris Facts App
 
-App de teste para o Guia Bolso
-Como executar:
-
-Usando o terminal vá até a pasta do projeto e execcute:
+App client for API https://api.chucknorris.io/
+How to run:
 
 	./gradlew installDebug
-
-* Com um dispositivo conectado ou o emulador rodando
